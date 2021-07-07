@@ -4,7 +4,8 @@ import Navbar from './components/navbar';
 import Home from './components/home';
 import About from './components/about';
 import Contact from './components/contact';
-import {BrowserRouter, Route} from 'react-router-dom';
+import Post from './components/post';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 class App extends Component{
   render(){
@@ -12,9 +13,12 @@ class App extends Component{
       <BrowserRouter>
         <div className="App">
           <Navbar/>
-          <Route path="/home.js" component={Home}/>
-          <Route path="/about.js" component={About}/>
-          <Route path="/contact.js" component={Contact}/>
+          <Switch>
+            <Route exact path="/" component={Home}/>
+            <Route path="/about" component={About}/>
+            <Route path="/contact" component={Contact}/>
+            <Route path="/:post_id" component={Post}/>
+          </Switch>
         </div>
       </BrowserRouter>
     );
