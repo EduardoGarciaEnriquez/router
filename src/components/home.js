@@ -1,28 +1,30 @@
 //Container component
 import React, { Component } from 'react';
-import axios from 'axios';
-//import {Link} from 'react-router-dom';
+//import axios from 'axios';
+import {Link} from 'react-router-dom';
 import ninja from '../img/ninja.png';
+import {connect} from 'react-redux';
 
 class Home extends Component {
-  state = {
-    posts : []
-  }
-  componentDidMount(){
-    //this is asyncronous and will return a promisse, meaning that this will acomplish at some point in time
-    axios.get('https://jsonplaceholder.typicode.com/posts')
-    //.then method fires when the promisse is completed, so we will run .then only when axios.get has completed loaded
-    .then(res =>{  //res = response function
-      //console.log(res); //console log response
-      this.setState({ //update state
-        posts : res.data.slice(0,10) //response > data array > take only the first 10
-      })
-    });
-  }
+  // state = {
+  //   posts : []
+  // }
+  // componentDidMount(){
+  //   //this is asyncronous and will return a promisse, meaning that this will acomplish at some point in time
+  //   axios.get('https://jsonplaceholder.typicode.com/posts')
+  //   //.then method fires when the promisse is completed, so we will run .then only when axios.get has completed loaded
+  //   .then(res =>{  //res = response function
+  //     //console.log(res); //console log response
+  //     this.setState({ //update state
+  //       posts : res.data.slice(0,10) //response > data array > take only the first 10
+  //     })
+  //   });
+  // }
   
   render() {
+    console.log(this.props);
     //get the posts property from state and save it into a const 
-    const {posts} = this.state;
+    const {posts} = this.props;
 
     //check if the post promisse already updated response, so posts.length == true to cycle the array
     //saving each post element in the postList array
@@ -32,9 +34,9 @@ class Home extends Component {
           <div className="post card" key={post.id}>
             <div className="card-content">
             <img src={ninja} alt="MXflag"/>
-              <a className="red-text" href={'/'+post.id}>
+              <Link className="red-text" to={'/'+post.id}>
                 <span className="card-title">{post.title}</span>
-              </a>             
+              </Link>             
               <p>{post.body}</p>
             </div>
           </div>
@@ -64,6 +66,11 @@ class Home extends Component {
 //   )
 // }
 
+const mapStateToProps = (state) =>{
+  return {
+    posts: state.posts
+  }
+}
 
 
-export default Home;
+export default connect(mapStateToProps)(Home);

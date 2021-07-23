@@ -1,6 +1,6 @@
 //UI supercharged component 
 import React from 'react';
-import { Link, NavLink, withRouter} from 'react-router-dom';
+import { Link, withRouter} from 'react-router-dom';
 const Navbar = (/*props*/) =>{
   //Auto redirect the web page to contact after 2s
   // setTimeout(() => {
@@ -9,7 +9,7 @@ const Navbar = (/*props*/) =>{
   return(
     <nav className="nav-wrapper red darken-3 expand">
         <div className="container">
-          <a href="" className="brand-logo">Ninjas.com</a>
+          <a href="#" className="brand-logo">Ninjas.com</a>
           <ul className="right">
             <li><Link to="/">Home</Link></li>
             <li><Link to="/about">About</Link></li>
